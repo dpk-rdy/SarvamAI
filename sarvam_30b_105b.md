@@ -6,7 +6,7 @@ India just open-sourced two reasoning models trained entirely in India, on compu
 
 ---
 
-## Why This Release Matters
+## The Release
 
 The open-source LLM landscape in 2026 has consolidated around a handful of architectural patterns: dense transformers (Gemma, Mistral), mixture-of-experts with GQA (Qwen3, early DeepSeek), and the increasingly popular MLA-based MoE architecture that DeepSeek popularized with V2 in 2024. Sarvam's two models span this architectural spectrum deliberately.
 
