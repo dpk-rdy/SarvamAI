@@ -1,14 +1,12 @@
-# Sarvam 30B and 105B: A Deep Technical Dive into India's First Sovereign Reasoning LLMs
-
-*March 2026*
+# Sarvam 30B & 105B: The Architecture, Training Pipeline, and Inference Stack Behind India's Reasoning Models
 
 ---
 
-India just open-sourced two reasoning models trained entirely on Indian soil, on compute provided under the IndiaAI Mission, and they are legitimately competitive with the global frontier at their scale class. This is not a fine-tune of an existing model. This is not a distillation run from a proprietary teacher. Sarvam AI built the full stack from scratch: tokenizer, architecture, data pipelines, SFT framework, reinforcement learning infrastructure, inference kernels, and evaluation methodology. Let us go deep on what makes these models technically interesting.
+India just open-sourced two reasoning models trained entirely in India, on compute provided under the IndiaAI Mission, and they are legitimately competitive with the global frontier at their scale class. This is not a fine-tune of an existing model. This is not a distillation run from a proprietary teacher. Sarvam AI built the full stack from scratch: tokenizer, architecture, data pipelines, SFT framework, reinforcement learning infrastructure, inference kernels, and evaluation methodology.
 
 ---
 
-## Why This Release Matters Beyond National Pride
+## Why This Release Matters
 
 The open-source LLM landscape in 2026 has consolidated around a handful of architectural patterns: dense transformers (Gemma, Mistral), mixture-of-experts with GQA (Qwen3, early DeepSeek), and the increasingly popular MLA-based MoE architecture that DeepSeek popularized with V2 in 2024. Sarvam's two models span this architectural spectrum deliberately.
 
