@@ -159,9 +159,43 @@ The practical effect for Indic-language serving: when combined with kernel-level
 
 ### Sarvam 105B vs. Frontier Models
 
-![Sarvam 105B Benchmark Table](105b_benchmarks.png)
+**Sarvam 105B vs. Frontier Peers**
 
-*Sarvam 105B vs. GLM-4.5-Air (106B), GPT-OSS-120B, and Qwen3-Next-80B-A3B. The model leads strongly on BrowseComp (49.5) and Tau2 (68.3), and is competitive on math and coding benchmarks.*
+| Benchmark | Sarvam-105B | GLM-4.5-Air (106B) | GPT-OSS-120B | Qwen3-Next-80B-A3B |
+|---|---|---|---|---|
+| **GENERAL** | | | | |
+| Math500 | 98.6 | 97.2 | 97.0 | 98.2 |
+| Live Code Bench v6 | 71.7 | 59.5 | 72.3 | 68.7 |
+| MMLU | 90.6 | 87.3 | 90.0 | 90.0 |
+| MMLU Pro | 81.7 | 81.4 | 80.8 | 82.7 |
+| Arena Hard v2 | 71.0 | 68.1 | 88.5 | 68.2 |
+| IF Eval | 84.8 | 83.5 | 85.4 | 88.9 |
+| **REASONING** | | | | |
+| GPQA Diamond | 78.7 | 75.0 | 80.1 | 77.2 |
+| AIME 25 (w/ tools) | 88.3 (96.7) | 83.3 | 90.0 | 87.8 |
+| HMMT Feb 25 | 85.8 | 69.2 | 90.0 | 73.9 |
+| HMMT Nov 25 | 85.8 | 75.0 | 90.0 | 80.0 |
+| Beyond AIME | 69.1 | 61.5 | 51.0 | 68.0 |
+| **AGENTIC** | | | | |
+| BrowseComp | **49.5** | 21.3 | — | 38.0 |
+| SWE Bench Verified | 45.0 | 57.6 | 50.6 | 34.46 |
+| Tau2 (avg.) | **68.3** | 53.2 | 65.8 | 55.0 |
+
+**Sarvam 105B vs. Larger Previous-Generation Models**
+
+| Benchmark | Sarvam-105B | DeepSeek R1 0528 | Gemini-2.5-Flash | o4-mini | Claude 4 Sonnet |
+|---|---|---|---|---|---|
+| AIME25 | 88.3 | 87.5 | 72.0 | 92.7 | 70.5 |
+| HMMT Feb 2025 | 85.8 | 79.4 | 64.2 | 83.3 | 75.6 |
+| GPQA Diamond | 78.7 | 81.0 | 82.8 | 81.4 | 75.4 |
+| Live Code Bench v6 | 71.7 | 73.3 | 61.9 | 80.2 | 55.9 |
+| MMLU Pro | 81.7 | 85.0 | 82.0 | 81.9 | 83.7 |
+| BrowseComp | **49.5** | 3.2 | 20.0 | 28.3 | 14.7 |
+| SWE Bench Verified | 45.0 | 57.6 | 48.9 | 68.1 | 66.6 |
+| Tau2 Bench | **68.3** | 62.0 | 49.7 | 65.9 | 64.0 |
+| HLE | 11.2 | 8.5 | 12.1 | 14.3 | 9.6 |
+
+*Against significantly larger and newer models, Sarvam 105B leads on BrowseComp (49.5 vs. 3.2 for DeepSeek) and Tau2 (68.3 vs. 62.0 for DeepSeek), while trailing on SWE Bench Verified and AIME25 vs. o4-mini.*
 
 The pattern is consistent with a model specifically optimized for agentic and tool-using workflows. **BrowseComp** (49.5 vs. the nearest competitor at 38.0) and **Tau2** (68.3 vs. 65.8 for GPT-OSS-120B) are the standout results. Tau2 measures long-horizon agentic reasoning and task completion, which is exactly the workload Sarvam 105B powers in production via the Indus assistant.
 
@@ -171,11 +205,28 @@ Against larger previous-generation models (DeepSeek R1 0528, Gemini-2.5-Flash, o
 
 ### Sarvam 30B vs. Comparable Models
 
-![Sarvam 30B Full Benchmark Table](benchmark_table_30b.png)
+| Benchmark | Sarvam-30B | Gemma 27B-IT | Mistral-3.2-24B | OLMo 3.1 32B Think | Nemotron-3-Nano-30B | Qwen3-30B-Thinking | GLM-4.7-Flash | GPT-OSS-20B |
+|---|---|---|---|---|---|---|---|---|
+| **GENERAL** | | | | | | | | |
+| Math500 | 97.0 | 87.4 | 69.4 | 96.2 | 98.0 | 97.6 | 97.0 | 94.2 |
+| HumanEval | 92.1 | 88.4 | 92.9 | 95.1 | 97.6 | 95.7 | 96.3 | 95.7 |
+| MBPP | 92.7 | 81.8 | 78.3 | 58.7 | 91.9 | 94.3 | 91.8 | 95.3 |
+| Live Code Bench v6 | **70.0** | 28.0 | 26.0 | 73.0 | 68.3 | 66.0 | 64.0 | 61.0 |
+| MMLU | 85.1 | 81.2 | 80.5 | 86.4 | 84.0 | 88.4 | 86.9 | 85.3 |
+| MMLU Pro | **80.0** | 68.1 | 69.1 | 72.0 | 78.3 | 80.9 | 73.6 | 75.0 |
+| Arena Hard v2 | 49.0 | 50.1 | 43.1 | 42.0 | 67.7 | 72.1 | 58.1 | 62.9 |
+| **REASONING** | | | | | | | | |
+| GPQA Diamond | 66.5 | — | — | 57.5 | 73.0 | 73.4 | 75.2 | 71.5 |
+| AIME 25 (w/ tools) | 80.0 (96.7) | — | — | 78.1 (81.7) | 89.1 (99.2) | 85.0 | 91.6 | 91.7 (98.7) |
+| HMMT Feb 2025 | 73.3 | — | — | 51.7 | 85.0 | 71.4 | 85.0 | 76.7 |
+| HMMT Nov 2025 | 74.2 | — | — | 58.3 | 75.0 | 73.3 | 81.7 | 68.3 |
+| Beyond AIME | 58.3 | — | — | 48.5 | 64.0 | 61.0 | 60.0 | 46.0 |
+| **AGENTIC** | | | | | | | | |
+| BrowseComp | **35.5** | — | — | — | 23.8 | 2.9 | 42.8 | 28.3 |
+| SWE-Bench Verified | 34.0 | — | — | — | 38.8 | 22.0 | 59.2 | 34.0 |
+| Tau2 (avg.) | 45.7 | — | — | — | 49.0 | 47.7 | 79.5 | 48.7 |
 
-*Sarvam 30B vs. seven comparable models including Gemma 27B-IT, Mistral-3.2-24B, OLMo 3.1 32B Think, Nemotron-3-Nano-30B, Qwen3-30B-Thinking, GLM-4.7-Flash, and GPT-OSS-20B across General, Reasoning, and Agentic benchmarks.*
-
-![Sarvam 30B Benchmark Detail](30b_benchmarks.png)
+*Gemma and Mistral are included for completeness as dense non-reasoning baselines; reasoning/agentic cells are left empty accordingly.*
 
 The 30B model leads its weight class on **Live Code Bench v6** (70.0), **MMLU Pro** (80.0), and **BrowseComp** (35.5 vs. Nemotron's 23.8). Qwen3-30B-Thinking's BrowseComp score (2.9) is striking and suggests that pure thinking-mode models may regress on web-search-driven agentic tasks that require efficient information retrieval rather than extended internal reasoning chains.
 
